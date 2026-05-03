@@ -1,0 +1,337 @@
+{
+  "archive_plan": {
+    "id": "AP-20260503-002",
+    "folder_url": "https://drive.google.com/drive/u/0/folders/1kQottdbTsgRsFmF-wXEHn6NxWWuyRYTA",
+    "folder_role": "park_architecture_and_scenario_materials",
+    "status": "pending_manual_or_tool_move",
+    "reason": "Codex can list and inspect this Google Drive folder, but the currently available Google Drive connector does not expose a move/update-parent or rename operation for existing files.",
+    "rules_applied": [
+      "D-20260503-001",
+      "D-20260503-003",
+      "D-20260503-005",
+      "C-20260503-001"
+    ],
+    "recommended_structure": [
+      {
+        "folder_name": "01_当前架构总览",
+        "memory_node": "tech_architecture",
+        "purpose": "存放公园总体架构图、系统架构说明和可用于修改架构图的主素材。"
+      },
+      {
+        "folder_name": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "purpose": "存放设备接入方式、网关路径、标准协议、适配器路径和鸿蒙化说明。"
+      },
+      {
+        "folder_name": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "purpose": "存放各业务场景闭环链路材料，如导航、照明、跑步、集卡、应急、生态等。"
+      },
+      {
+        "folder_name": "04_专题链路",
+        "memory_node": "tech_architecture",
+        "purpose": "存放独立专题链路，例如垃圾识别环卫机器人完整链路。"
+      },
+      {
+        "folder_name": "05_历史材料与说明",
+        "memory_node": "tech_architecture",
+        "purpose": "存放历史说明、旧版本鸿蒙化情况、可参考但不直接作为当前架构依据的资料。"
+      },
+      {
+        "folder_name": "99_系统文件_待删除",
+        "memory_node": "root_project",
+        "purpose": "存放 Thumbs.db 等系统缓存文件，确认无用后删除。"
+      }
+    ],
+    "items": [
+      {
+        "file_id": "1D3qtQh31BEek2z76e12VmAJmZD415rR0",
+        "file_name": "v6架构 设备-本地服务器-meta",
+        "file_type": "folder",
+        "current_location": "root",
+        "target_folder": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "reason": "该子文件夹包含设备接入路径、标准协议、适配器接入、鸿蒙网关设备和架构对照材料，适合作为接口/接入架构资料组。"
+      },
+      {
+        "file_id": "1c2Ob3qvMN3790sYwFiswuHPTcEw8-P-o",
+        "file_name": "场景",
+        "file_type": "folder",
+        "current_location": "root",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "该子文件夹包含停车导引、智慧照明、智慧跑步、生态监测、安全应急等场景闭环 HTML。"
+      },
+      {
+        "file_id": "1eUmh36zvFc8Ct6FESwx_TE23sN57obIu",
+        "file_name": "d7c45d3d-385f-423d-8245-0143c334ab1a.png",
+        "file_type": "image/png",
+        "current_location": "root",
+        "target_folder": "01_当前架构总览",
+        "recommended_name": "公园架构图_截图或导出图.png",
+        "memory_node": "tech_architecture",
+        "reason": "PNG 位于架构资料根目录，推定为架构图导出图或截图；需人工预览确认后重命名。"
+      },
+      {
+        "file_id": "1WGvBUcWGV7j4HZ-WbPTYE2BjPJoWJOEX",
+        "file_name": "三棵松鸿蒙公园_业务闭环场景与系统架构.docx",
+        "file_type": "docx",
+        "current_location": "root",
+        "target_folder": "01_当前架构总览",
+        "memory_node": "tech_architecture",
+        "reason": "文件名显示其为业务闭环场景与系统架构说明，应作为修改公园架构图的主参考文档。"
+      },
+      {
+        "file_id": "1Hx_BTArJkurExsU5qstShw_vuX-OxeA5",
+        "file_name": "三棵松鸿蒙化情况.docx",
+        "file_type": "docx",
+        "current_location": "root",
+        "target_folder": "05_历史材料与说明",
+        "memory_node": "tech_architecture",
+        "reason": "该文档修改时间较早，适合作为鸿蒙化历史说明或背景材料，不应优先覆盖最终清单。"
+      },
+      {
+        "file_id": "1FNwd1OH-lGXGdJDfpXzI-34Nj8VCPfHL",
+        "file_name": "Thumbs.db",
+        "file_type": "system_cache",
+        "current_location": "root",
+        "target_folder": "99_系统文件_待删除",
+        "memory_node": "root_project",
+        "reason": "Windows 缩略图缓存文件，不属于项目资料；确认无用后可删除。"
+      },
+      {
+        "file_id": "1jvvu4hvyOW7oi0Zz-HkFuGVNe-2rxjeG",
+        "file_name": "v6三棵松公园完整架构图_v6.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "01_当前架构总览",
+        "memory_node": "tech_architecture",
+        "reason": "当前最接近完整公园架构图的 HTML，应作为架构图修改的主版本来源。"
+      },
+      {
+        "file_id": "1Otu7EBhox4LQvM7ugj-NLei6onOQP0qn",
+        "file_name": "汇总对照.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "reason": "用于对照不同接入路径和架构版本。"
+      },
+      {
+        "file_id": "16D1F0IzXL4eLNIuEa_Y8C2nmsXxxXIiC",
+        "file_name": "鸿蒙网关设备.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "reason": "与网关设备接入和端侧架构直接相关。"
+      },
+      {
+        "file_id": "14A1CZqKTJGqNuQHoGQ6T5jFMA2KbUTSE",
+        "file_name": "标准协议直连.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "reason": "描述标准协议直连路径，属于接口和接入方式资料。"
+      },
+      {
+        "file_id": "1XRUKLrcW1pdVt59k68wMq_fRyJfC7fzH",
+        "file_name": "适配器接入.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "02_设备接入与协议路径",
+        "memory_node": "tech_interfaces",
+        "reason": "描述适配器接入路径；需在修订架构图时与最终清单一致性复核。"
+      },
+      {
+        "file_id": "1wO7SLh5-y--FBVkMELzDQzKC0-NYFlxs",
+        "file_name": "既有设备鸿蒙话s.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "02_设备接入与协议路径",
+        "recommended_name": "既有设备鸿蒙化.html",
+        "memory_node": "tech_interfaces",
+        "reason": "文件名疑似错字，应重命名后归入设备鸿蒙化接入资料。"
+      },
+      {
+        "file_id": "1tTRNsYOoYPGvNF_F-HPplgZZ8DgI7Pgd",
+        "file_name": "垃圾识别环卫机器人清洁完整链路.html",
+        "file_type": "html",
+        "current_location": "v6架构 设备-本地服务器-meta",
+        "target_folder": "04_专题链路",
+        "memory_node": "tech_architecture",
+        "reason": "该文件是独立业务专题链路，不宜混在设备接入方式资料中。"
+      },
+      {
+        "file_id": "1oxbEGDhx1l6kOJjfAJbplLHzRWkydE2q",
+        "file_name": "汇总.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "recommended_name": "业务闭环场景_汇总.html",
+        "memory_node": "tech_architecture",
+        "reason": "作为场景闭环汇总入口。"
+      },
+      {
+        "file_id": "1-aEMTJgBTKON1j7oeD6vtTo4M5rPyjL-",
+        "file_name": "消费服务.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1BTSwaBKVlENbgljcGGp9knL6eYZIf-O-",
+        "file_name": "停车导引.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "12A9Jri5QihhEoS2HQ8VfYulIxXKEUuQa",
+        "file_name": "生态监测.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1LRx0z_TwOEfU_-cJuU8im0KKv9bmIkma",
+        "file_name": "智慧照明.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1nz1cVf5OeOuPNN7NmLV4oEMNEw9Ms71c",
+        "file_name": "智慧跑步.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1cMPwljk0u4f1HS5EviM_hVWBpnY1ZZLF",
+        "file_name": "游玩集卡.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1iHfdg4tPK1j4HWqhPl6XPLMODz0uW_px",
+        "file_name": "智慧导航.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1rcmrMLcBaxg-fAvE-4n7_RkpcloeQLOa",
+        "file_name": "安全应急.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1hYUioXna5O6fswGqdrauyJ7A5uGJC-VX",
+        "file_name": "水库安全闭环.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1pA9aZwdwvKMpq4THNxSt2FfoLp8BpX87",
+        "file_name": "植被养护.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1-nosjDvoNvq7RBnMSHyEapHXgGdNNCYw",
+        "file_name": "环卫清洁.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1F_2ZBwwK1LpvnjOHdWaenNsDYkAoaYFE",
+        "file_name": "水电计量.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1H1lR5-NkyhBDIkjcy38PhxVEiltjKTsr",
+        "file_name": "sos求助.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "recommended_name": "SOS求助.html",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料；建议统一命名大小写。"
+      },
+      {
+        "file_id": "1uZ0s3HP86G6LXAV3xyJm7EC23tJUB1MC",
+        "file_name": "门禁安防.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      },
+      {
+        "file_id": "1iInmfmSeMnrvIvn6n4talf_0crf1P6_2",
+        "file_name": "能源双碳.html",
+        "file_type": "html",
+        "current_location": "场景",
+        "target_folder": "03_业务闭环场景",
+        "memory_node": "tech_architecture",
+        "reason": "业务场景闭环材料。"
+      }
+    ],
+    "next_actions": [
+      "优先打开并修订 01_当前架构总览/v6三棵松公园完整架构图_v6.html。",
+      "修订时以 DS-20260503-003 最终智能化清单为边界，避免沿用未确认的 Meta 直连、适配器替代或 LoRa 采购调整结论。",
+      "将设备接入路径统一标注为：端侧设备/传感器 -> 鸿蒙网关/服务器②本地IoT -> 服务器①闪电/管理平台/Meta或大运平台对接，具体路径需按清单和已确认决策细化。",
+      "确认 d7c45d3d-385f-423d-8245-0143c334ab1a.png 的实际内容后再重命名。",
+      "Thumbs.db 确认无用后删除。"
+    ],
+    "risks": [
+      {
+        "risk": "当前工具不能直接移动或重命名 Google Drive 既有文件。",
+        "impact": "本次整理无法完成物理归档，只能形成执行计划。",
+        "mitigation": "后续使用具备 Drive update_file/move 权限的工具，或由用户在 Drive UI 中按本计划移动。"
+      },
+      {
+        "risk": "文件夹内 v6 架构材料可能包含旧版未确认架构假设。",
+        "impact": "若直接用于网关任务书，可能与 C-20260503-001 冲突。",
+        "mitigation": "修改架构图前必须对照 DS-20260503-003 和 decisions/constraints。"
+      }
+    ]
+  },
+  "meta": {
+    "status": "initialized",
+    "updated_at": "2026-05-03"
+  }
+}

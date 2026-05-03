@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "id": "DS-20260503-001",
+      "name": "项目 data 在线表格",
+      "type": "online_spreadsheet",
+      "role": "primary_worklist_review",
+      "status": "url_recorded_access_blocked",
+      "url": "https://doc.weixin.qq.com/sheet/e3_AXoAfQaUAIACNsDplpOuiT3yvq1Te?scode=AI4Asgd9ABMzJ19o4gAXoAfQaUAIA&tab=000003",
+      "description": "项目最新工作清单的第一审阅来源。AI 在判断任务状态、优先级、负责人、进度和 blocker 前，应优先检查此表格；SYNC/project_data.json 是其结构化同步快照。",
+      "sync_target": "SYNC/project_data.json",
+      "access_note": "URL has been provided, but Codex web access could not open the Weixin document directly. Treat latest-worklist review as blocked unless the table is exported, shared in an accessible format, or manually synchronized.",
+      "updated_at": "2026-05-03"
+    },
+    {
+      "id": "DS-20260503-002",
+      "name": "Google Drive 在线项目文件夹",
+      "type": "google_drive_folder",
+      "role": "primary_document_repository",
+      "status": "active",
+      "url": "https://drive.google.com/drive/u/0/folders/1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO",
+      "description": "项目在线文档管理文件夹，用于存放项目管理、商务合同、技术方案、智慧化施工、软件开发、联调记录、汇报材料、运维和参考资料等文件。",
+      "access_note": "Codex Google Drive connector can list this folder. The project data spreadsheet has not been placed in this folder yet.",
+      "updated_at": "2026-05-03"
+    },
+    {
+      "id": "DS-20260503-003",
+      "name": "20260421 最终智能化清单",
+      "type": "google_sheet",
+      "role": "technical_scope_baseline",
+      "status": "active_cell_readable",
+      "url": "https://docs.google.com/spreadsheets/d/1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48/edit?gid=1194902564#gid=1194902564",
+      "description": "项目最终智能化清单，作为设备、系统、技术要求、报价和输出内容的范围符合性基准。",
+      "file_name": "20260421 最终智能化清单",
+      "file_id": "1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48",
+      "mime_type": "application/vnd.google-apps.spreadsheet",
+      "sheets": [
+        "鸿蒙多功能灯杆",
+        "鸿蒙网关开发需求",
+        "综合运维",
+        "公园管理平台对接",
+        "智慧游玩硬件设施",
+        "”闪电“智能体",
+        "前端应用开发",
+        "智慧厕所",
+        "建筑物门禁、网络、机房装饰",
+        "指挥中心",
+        "弱电机房"
+      ],
+      "access_note": "Native Google Sheet is accessible through the Google Drive connector. Structured cell reading has been verified on sheet 鸿蒙多功能灯杆 range A1:Z10.",
+      "updated_at": "2026-05-03"
+    }
+  ],
+  "meta": {
+    "status": "initialized",
+    "note": "The online spreadsheet URL has been recorded, but direct Codex access is currently blocked. AI tools must mark online worklist review as blocked unless the table is exported, shared in an accessible format, or manually synchronized.",
+    "updated_at": "2026-05-03"
+  }
+}

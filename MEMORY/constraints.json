@@ -1,0 +1,25 @@
+{
+  "constraints": [
+    {
+      "id": "C-20260503-001",
+      "title": "最终智能化清单符合性约束",
+      "constraint": "所有项目输出内容必须符合 DS-20260503-003《20260421 最终智能化清单》的范围、设备、系统和技术要求；不得输出与该清单冲突的内容。",
+      "reason": "确保 AI 生成的方案、文档、报价、设备建议和归档内容不偏离最终智能化清单。",
+      "scope": "全部项目输出",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "C-20260503-002",
+      "title": "先确认思路再执行动作约束",
+      "constraint": "AI 不得在项目工作中直接编程、修改文件、生成新文件、改写在线文档或执行会改变项目资料状态的动作；必须先向用户说明思路、修改范围、依据来源、影响和风险，并获得用户确认后再执行。",
+      "reason": "项目处于施工阶段，架构、任务书、清单和记忆记录会影响多方协作与供应商边界。先确认思路可避免 AI 基于误解直接产生文件、覆盖内容或形成冲突结论。",
+      "scope": "全部项目文件、Google Drive 文档、在线表格、本地文件、代码、架构图、需求文档、决策和约束记录",
+      "date": "2026-05-03"
+    }
+  ],
+  "meta": {
+    "status": "initialized",
+    "note": "AI tools must request confirmation before adding rejected, forbidden, or explicitly excluded items. AI tools must confirm approach before modifying or generating project artifacts.",
+    "updated_at": "2026-05-03"
+  }
+}

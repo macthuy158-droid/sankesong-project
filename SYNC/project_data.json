@@ -1,0 +1,10 @@
+{
+  "items": [],
+  "meta": {
+    "status": "initialized",
+    "source": "SYNC/data_sources.json#DS-20260503-001",
+    "source_role": "structured_snapshot_of_primary_online_worklist",
+    "note": "No project progress entries have been synchronized yet. AI tools must not infer missing progress. The online spreadsheet is the primary worklist review source once its URL is recorded.",
+    "updated_at": "2026-05-03"
+  }
+}

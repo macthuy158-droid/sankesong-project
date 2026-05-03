@@ -1,0 +1,54 @@
+{
+  "archive_plan": {
+    "id": "AP-20260503-001",
+    "source": "SYNC/data_sources.json#DS-20260503-002",
+    "status": "pending_manual_or_tool_move",
+    "reason": "Codex can list and inspect the Google Drive project folder, but the currently available Google Drive connector does not expose a move/update-parent operation for existing files.",
+    "rules_applied": [
+      "D-20260503-003",
+      "D-20260503-005"
+    ],
+    "items": [
+      {
+        "file_id": "1XE6skng7sd_zf4opx8wG5Blh2kk2WpzK",
+        "file_name": "三棵松公园_音响系统技术要求_2.docx",
+        "current_location": "Google Drive 项目根目录",
+        "target_folder": "04_智慧化施工/02_设备清单与技术规格",
+        "target_folder_id": "12nvNaEKZ76HRy_h0ca4PrR9Pf8NurWro",
+        "memory_node": "const_specs",
+        "reason": "内容是智慧灯杆音响系统技术要求说明书，面向厂家深化设计和报价，属于设备技术规格资料。"
+      },
+      {
+        "file_id": "1j46Vcv54UoGfgpXYBcUrphblp-3vN_ul",
+        "file_name": "三棵松鸿蒙公园_软件开发工作量估算.docx",
+        "current_location": "Google Drive 项目根目录",
+        "target_folder": "05_软件开发/开发资料",
+        "target_folder_id": "1858ks7nhPbpK_fjVE8JErmICM5-ZVXo3",
+        "memory_node": "development",
+        "reason": "内容为软件开发人天、模块、费用和角色估算，覆盖软件开发整体工作量。"
+      },
+      {
+        "file_id": "19DS_B_3BDo4OeJaCGoD1HjHAyaRrNqv6",
+        "file_name": "Meta平台正式沟通函_完整版.docx",
+        "current_location": "Google Drive 项目根目录",
+        "target_folder": "02_商务合同/01_深开鸿（Meta平台）",
+        "target_folder_id": "1jwSckOAEKDGWXUthZeIQqx3YFy10MxsC",
+        "memory_node": "biz_shenkaihong",
+        "reason": "内容是对接区政数局和深开鸿 Meta 平台的正式沟通函，涉及接入架构、费用、服务边界和提资要求。"
+      },
+      {
+        "file_id": "1ccWDuXtnj6qijAOMyJgX1LPtNmjirLYH",
+        "file_name": "智能化项目文件管理架构.html",
+        "current_location": "Google Drive 项目根目录",
+        "target_folder": "09 参考资料",
+        "target_folder_id": "1d6Nu4PPyZCzzwzlESkkTcCNRiaU61-OB",
+        "memory_node": "root_project",
+        "reason": "该 HTML 是当前文件夹结构和记忆图谱的来源材料，属于项目归档结构参考资料。"
+      }
+    ]
+  },
+  "meta": {
+    "status": "initialized",
+    "updated_at": "2026-05-03"
+  }
+}

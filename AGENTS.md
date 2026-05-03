@@ -1,0 +1,140 @@
+# AI Project Operating Rules
+
+## Required Data Sources
+
+Before making any project judgment, plan, recommendation, or code change, every AI tool must read:
+
+- `SYNC/project_data.json`
+- `SYNC/data_sources.json`
+- `MEMORY/decisions.json`
+- `MEMORY/constraints.json`
+- `MEMORY/memory_graph.json`
+
+These files are the authoritative sources for project data source registration, synchronized project progress, project decisions, project constraints, and project memory topology.
+
+## Mandatory Behavior
+
+- Check `SYNC/data_sources.json` before judging project progress.
+- Treat the registered project data online spreadsheet as the primary review source for the latest worklist.
+- Treat `SYNC/project_data.json` as the structured synchronized snapshot of the online worklist.
+- If the online spreadsheet URL is missing or inaccessible, mark latest-worklist review as blocked and avoid inventing task status.
+- Base all output on the current synchronized project progress in `SYNC/project_data.json`, while noting whether it has been checked against the online spreadsheet.
+- Check all proposed actions against decisions in `MEMORY/decisions.json`.
+- Check all proposed actions against constraints in `MEMORY/constraints.json`.
+- Use `MEMORY/memory_graph.json` to place new information into the correct project memory domain.
+- Use `AI_PROJECT_WORK_ARCHITECTURE.md` as the quick onboarding entry point for other AI tools.
+- Cite relevant decision IDs when making recommendations.
+- Cite relevant constraint IDs when avoiding or rejecting an action.
+- Mark blockers and risks explicitly.
+- Do not infer missing project state.
+- Do not ignore, silently override, or contradict existing decisions.
+- Do not repeat, recommend, or silently revive items that have been explicitly rejected or forbidden.
+- Before programming, modifying files, generating new files, editing online documents, changing spreadsheets, or performing any action that changes project artifacts, first explain the intended approach, source basis, affected files or documents, expected impact, and risks, then wait for user confirmation.
+- If the user has not confirmed the approach, limit output to analysis, options, questions, or a proposed action plan; do not perform the artifact-changing action.
+
+## Decision Recording
+
+When the user states a clear project judgment or rule, treat it as a potential decision.
+
+Before writing it to `MEMORY/decisions.json`, ask the user to confirm.
+
+After confirmation, add a decision record with:
+
+- `id`
+- `title`
+- `decision`
+- `reason`
+- `date`
+
+## Constraint Recording
+
+When the user states that something is rejected, forbidden, excluded, out of scope, or must not be done, treat it as a potential constraint.
+
+Before writing it to `MEMORY/constraints.json`, ask the user to confirm.
+
+After confirmation, add a constraint record with:
+
+- `id`
+- `title`
+- `constraint`
+- `reason`
+- `scope`
+- `date`
+
+## Active Confirmation Duty
+
+If an AI tool detects that a user message contains either:
+
+- a decision-related statement, or
+- a forbidden, rejected, excluded, or out-of-scope statement,
+
+the AI tool must proactively ask whether to write it into the corresponding long-term record.
+
+## Thought Confirmation Before Action
+
+All AI tools must follow `C-20260503-002`.
+
+Before executing any artifact-changing action, the AI tool must:
+
+- Read the required data sources.
+- State the proposed action and why it is needed.
+- Identify the target files, Google Drive documents, spreadsheets, diagrams, code, or memory records that may change.
+- Cite the relevant source, decision, or constraint basis.
+- Mark risks and possible conflicts.
+- Ask the user to confirm before proceeding.
+
+Artifact-changing actions include but are not limited to:
+
+- Creating, editing, renaming, moving, deleting, or overwriting local files.
+- Creating or editing Google Docs, Sheets, Slides, Drive files, HTML files, Word documents, spreadsheets, architecture diagrams, or generated artifacts.
+- Writing to `MEMORY/decisions.json`, `MEMORY/constraints.json`, `MEMORY/memory_graph.json`, `SYNC/project_data.json`, or `SYNC/data_sources.json`.
+- Running code generation or scripts that write project files.
+
+If the user explicitly asks to record this confirmation rule itself, the AI may write this rule after reading the required sources, because the user has already confirmed that specific update.
+
+## Memory Graph Updates
+
+`MEMORY/memory_graph.json` may be updated when the project file architecture, work domains, subsystem boundaries, or cross-domain relationships change.
+
+Before changing the graph structure, the AI tool must:
+
+- Read all required data sources.
+- State which nodes, categories, or edges need to be added, renamed, merged, split, or removed.
+- Check whether the change conflicts with existing decisions or constraints.
+- Ask the user to confirm the graph update.
+
+After confirmation, update `MEMORY/memory_graph.json` and preserve existing node IDs whenever possible. If a node must be replaced, keep the old node traceable by adding a relationship or migration note rather than silently deleting context.
+
+Graph updates should not be used to record ordinary task progress. Ordinary progress belongs in `SYNC/project_data.json`; decisions belong in `MEMORY/decisions.json`; rejected or forbidden items belong in `MEMORY/constraints.json`.
+
+## Online Worklist Source
+
+The project data online spreadsheet is the first review source for the latest worklist. Its registration belongs in `SYNC/data_sources.json`.
+
+When the online spreadsheet changes, AI tools should synchronize its relevant rows into `SYNC/project_data.json` using the established fields:
+
+- `type`
+- `name`
+- `status`
+- `stage`
+- `owner`
+- `progress`
+- `blocker`
+
+If the online spreadsheet and `SYNC/project_data.json` conflict, the AI tool must flag the conflict, prefer the online spreadsheet for latest status, and update the JSON snapshot only after the intended sync is clear.
+
+## Online Document Repository
+
+The Google Drive project folder registered in `SYNC/data_sources.json` is the primary online document repository.
+
+AI tools should use this folder when checking project documents, source materials, exported files, or generated project artifacts. The document repository does not replace the online worklist source; the worklist spreadsheet remains the first review source for latest task status once available.
+
+When generating or organizing project documents, AI tools should place the artifact in the Google Drive subfolder that matches `MEMORY/memory_graph.json`. If the correct destination is unclear, the AI tool must state the likely memory domain and ask for confirmation before filing.
+
+Decision and constraint records should stay structurally aligned with the memory graph and Drive folder structure. Project data updates remain governed by the project online worklist source and synchronized into `SYNC/project_data.json`.
+
+## Final Smartization List
+
+`DS-20260503-003` in `SYNC/data_sources.json` is the technical scope baseline. All project outputs must conform to this list. If exact row-level verification is required but the list is not available as a readable native Google Sheet or exported file, the AI tool must mark final-list verification as a risk.
+
+The current `DS-20260503-003` source is a readable native Google Sheet. AI tools must select the relevant worksheet and range before making equipment, system, quantity, or technical-scope claims.

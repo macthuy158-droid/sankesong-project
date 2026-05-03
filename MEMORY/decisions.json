@@ -1,0 +1,51 @@
+{
+  "decisions": [
+    {
+      "id": "D-20260503-001",
+      "title": "AI项目统一数据源原则",
+      "decision": "所有AI工具在执行项目前，必须读取 SYNC/project_data.json 和 MEMORY/decisions.json，并以这两份文件作为唯一项目进度与决策依据。",
+      "reason": "确保 Claude、Codex、OpenClaw 等工具使用同一份项目事实和长期决策，避免冲突结论、重复假设或擅自推翻已有决策。",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "D-20260503-002",
+      "title": "AI主动识别并确认记录机制",
+      "decision": "当AI识别到用户表达了决策相关事项或禁止相关事项时，必须主动发起确认，询问是否写入对应的长期记录文件。",
+      "reason": "将关键判断和否决事项及时转化为结构化记忆，避免长期施工中重复讨论、遗漏约束或产生冲突结论。",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "D-20260503-003",
+      "title": "项目记忆图谱结构原则",
+      "decision": "项目记忆结构按照《智能化项目文件管理架构.html》的目录树构建，并通过 MEMORY/memory_graph.json 维护记忆节点、分类和关系。",
+      "reason": "让项目记忆与实际文件管理结构保持一致，便于 Claude、Codex、OpenClaw 在同一拓扑下归档、检索和引用项目信息。",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "D-20260503-004",
+      "title": "在线工作清单第一审阅原则",
+      "decision": "项目 data 在线表格作为项目最新工作清单的第一审阅来源；SYNC/project_data.json 作为该在线表格的结构化同步快照，供 AI 工具离线读取、比对和输出使用。",
+      "reason": "在线表格更适合多人维护最新任务状态，结构化 JSON 更适合 AI 稳定读取。两者分工可避免 AI 直接基于过期本地数据输出。",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "D-20260503-005",
+      "title": "Google Drive文件夹归档与记忆结构对齐原则",
+      "decision": "Google Drive 在线项目文件夹用于承载 AI 生成或整理的项目文档；生成不同类型文档时，应依据 MEMORY/memory_graph.json 和 Drive 文件夹结构归档到对应目录。所有决策记忆也应与该文件夹/记忆图谱结构保持一致。项目唯一数据更新由项目在线表格清单制定，并同步到 SYNC/project_data.json。",
+      "reason": "将文档归档、决策记忆和项目数据更新分层管理：Drive 负责文档沉淀，memory_graph 负责结构定位，decisions/constraints 负责长期判断，在线表格负责最新工作清单。",
+      "date": "2026-05-03"
+    },
+    {
+      "id": "D-20260503-006",
+      "title": "区Meta平台对接责任边界",
+      "decision": "深开鸿不参与三棵松项目实施；涉及区Meta平台的接入，由区Meta平台团队提供对接文档和技术支持，我方或服务器②分包方负责按文档完成系统对接、联调和验收。",
+      "reason": "明确Meta平台对接责任边界，避免后续将深开鸿误作为项目实施或联调责任方，影响服务器②分包范围、报价和沟通路径。",
+      "date": "2026-05-03"
+    }
+  ],
+  "meta": {
+    "status": "initialized",
+    "note": "AI tools must request confirmation before adding new decisions.",
+    "updated_at": "2026-05-03"
+  }
+}

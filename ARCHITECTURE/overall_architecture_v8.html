@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三棵松鸿蒙公园整体架构图 v8</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #cfd8e3;
+      --platform: #28364f;
+      --middle: #eef3fb;
+      --ops: #2563eb;
+      --sports: #16a34a;
+      --commerce: #f97316;
+      --gateway: #e9f5ff;
+      --assume: #fff7ed;
+      --server2: #f1f5f9;
+      --risk: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: min(1680px, calc(100vw - 32px));
+      margin: 20px auto;
+      background: var(--paper);
+      border: 1px solid #d9e2ef;
+      border-radius: 12px;
+      box-shadow: 0 18px 50px rgba(23, 32, 51, 0.10);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 24px 30px 18px;
+      background: linear-gradient(135deg, #182235, #293955);
+      color: #fff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #d9e5f7;
+      font-size: 14px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      padding: 14px 30px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfdff;
+      font-size: 13px;
+      color: #344054;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .swatch {
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .swatch.ops { background: var(--ops); }
+    .swatch.sports { background: var(--sports); }
+    .swatch.commerce { background: var(--commerce); }
+    .swatch.gateway { background: var(--gateway); border: 1px solid #7dd3fc; }
+    .swatch.assume { background: var(--assume); border: 1px dashed #fb923c; }
+    .swatch.server2 { background: var(--server2); border: 1px solid #94a3b8; }
+
+    main {
+      padding: 22px 28px 28px;
+    }
+
+    .layer {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      margin-bottom: 18px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      color: #fff;
+      background: var(--platform);
+      font-weight: 720;
+      font-size: 16px;
+    }
+
+    .layer-title small {
+      color: #cbd5e1;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .middle .layer-title {
+      background: #304c78;
+    }
+
+    .device-layer .layer-title {
+      background: #374151;
+    }
+
+    .platform-grid,
+    .middle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding: 16px;
+      background: #f8fafc;
+    }
+
+    .middle-grid {
+      grid-template-columns: 1.15fr 1.35fr 1.15fr 1.05fr;
+      background: var(--middle);
+    }
+
+    .system {
+      min-height: 116px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .system.dark {
+      background: #243044;
+      color: #fff;
+      border-color: #41516b;
+    }
+
+    .system h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .system p,
+    .system li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .system.dark p,
+    .system.dark li {
+      color: #d7deea;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 17px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr 48px 1fr;
+      align-items: stretch;
+      gap: 0;
+      padding: 12px 16px 4px;
+      color: #475467;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .flow span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+    }
+
+    .arrow {
+      color: #64748b;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding: 16px;
+      background: #fafafa;
+    }
+
+    .access-col {
+      border-radius: 10px;
+      border: 2px solid #d0d5dd;
+      overflow: hidden;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .access-col.gateway {
+      border-color: #7dd3fc;
+      background: var(--gateway);
+    }
+
+    .access-col.assume {
+      border-color: #fb923c;
+      border-style: dashed;
+      background: var(--assume);
+    }
+
+    .access-col.server2 {
+      border-color: #94a3b8;
+      background: var(--server2);
+    }
+
+    .access-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.14);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .access-head h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .access-head p {
+      margin: 5px 0 0;
+      font-size: 12px;
+      color: #475467;
+    }
+
+    .device-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      padding: 12px;
+    }
+
+    .device {
+      border-radius: 7px;
+      padding: 9px 10px;
+      background: #fff;
+      border: 1px solid #d0d5dd;
+      border-left: 5px solid var(--ops);
+      min-height: 66px;
+    }
+
+    .device h4 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .device p {
+      margin: 0;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .device.ops { border-left-color: var(--ops); }
+    .device.sports { border-left-color: var(--sports); }
+    .device.commerce { border-left-color: var(--commerce); }
+
+    .notes {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .note {
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .note h3 {
+      margin: 0 0 7px;
+      font-size: 14px;
+    }
+
+    .note p {
+      margin: 0;
+      font-size: 12.5px;
+      color: #475467;
+    }
+
+    .risk {
+      border-color: #fecdca;
+      background: #fff6f5;
+    }
+
+    .risk h3 {
+      color: var(--risk);
+    }
+
+    footer {
+      padding: 12px 28px 18px;
+      color: #667085;
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      background: #fbfdff;
+    }
+
+    @media (max-width: 1180px) {
+      .platform-grid,
+      .middle-grid,
+      .access-grid,
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      .device-list {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <header>
+      <h1>三棵松鸿蒙公园整体架构图 v8</h1>
+      <div class="subtitle">设备接入按三类路径管理；业务颜色仅表示综合运维、运动休闲、消费娱乐；技术范围以 DS-20260503-003 为准。</div>
+    </header>
+
+    <section class="legend" aria-label="图例">
+      <span class="legend-item"><span class="swatch ops"></span>综合运维</span>
+      <span class="legend-item"><span class="swatch sports"></span>运动休闲</span>
+      <span class="legend-item"><span class="swatch commerce"></span>消费娱乐</span>
+      <span class="legend-item"><span class="swatch gateway"></span>直接走网关</span>
+      <span class="legend-item"><span class="swatch assume"></span>Assume 走网关，待协议确认</span>
+      <span class="legend-item"><span class="swatch server2"></span>复杂系统走服务器②</span>
+    </section>
+
+    <main>
+      <section class="layer">
+        <div class="layer-title">
+          <span>区级平台层</span>
+          <small>展示、监管、配置下发、非实时闭环</small>
+        </div>
+        <div class="platform-grid">
+          <article class="system dark">
+            <h3>区 Meta 平台</h3>
+            <p>接收统一物模型、设备状态、告警、指标和控制能力；由平台团队提供对接文档与技术支持。</p>
+          </article>
+          <article class="system">
+            <h3>大运管理平台</h3>
+            <p>园区运营展示、业务统计、工单协同、空间信息和管理侧入口。</p>
+          </article>
+          <article class="system">
+            <h3>CIM / 指挥中心</h3>
+            <p>三维空间承载、态势展示、事件联动、值班指挥和汇报大屏。</p>
+          </article>
+          <article class="system">
+            <h3>游客与运营入口</h3>
+            <p>微信小程序、鸿蒙元服务、灯杆屏、瀑布屏、管理后台。</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="flow" aria-label="上行数据流">
+        <span>底层设备与系统</span>
+        <span class="arrow">↑</span>
+        <span>园区中台统一建模、缓存、策略、接口</span>
+        <span class="arrow">↑</span>
+        <span>区级平台展示与监管</span>
+      </div>
+
+      <section class="layer middle">
+        <div class="layer-title">
+          <span>园区中台层</span>
+          <small>服务器② IoT 中间层 + 服务器①闪电智能体 + 共享数据层</small>
+        </div>
+        <div class="middle-grid">
+          <article class="system">
+            <h3>鸿蒙网关集群</h3>
+            <ul>
+              <li>端侧协议采集与控制</li>
+              <li>星闪、NFC、RS485、Modbus 等接入插件</li>
+              <li>本地基础闭环和断网缓存</li>
+            </ul>
+          </article>
+          <article class="system dark">
+            <h3>服务器② IoT 中间层</h3>
+            <ul>
+              <li>复杂系统接入、协议转换、统一物模型</li>
+              <li>设备注册、权限、策略、日志、告警、API 网关</li>
+              <li>向 Meta、大运平台、服务器①提供标准接口</li>
+            </ul>
+          </article>
+          <article class="system">
+            <h3>服务器① 闪电智能体</h3>
+            <ul>
+              <li>AI 问答、RAG、ASR、TTS、数字人互动</li>
+              <li>通过服务器② API 获取状态和发起动作</li>
+              <li>不直接承担设备协议接入责任</li>
+            </ul>
+          </article>
+          <article class="system">
+            <h3>共享数据层</h3>
+            <ul>
+              <li>PostgreSQL / TimescaleDB / Redis / ChromaDB</li>
+              <li>设备台账、时序数据、事件、知识库、业务配置</li>
+              <li>本地闭环优先，平台同步异步化</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="layer device-layer">
+        <div class="layer-title">
+          <span>底层设备接入层</span>
+          <small>接入路径分三类；卡片颜色仅表示业务归属</small>
+        </div>
+        <div class="access-grid">
+          <section class="access-col gateway">
+            <div class="access-head">
+              <h2>直接走网关</h2>
+              <p>协议清晰、点位简单、复用价值高，优先沉淀为网关插件。</p>
+            </div>
+            <div class="device-list">
+              <article class="device ops">
+                <h4>鸿蒙多功能灯杆 A/B/C/D/D1/P</h4>
+                <p>灯控、电源、屏幕、音频、传感和本地点位。</p>
+              </article>
+              <article class="device ops">
+                <h4>独立鸿蒙网关</h4>
+                <p>非灯杆区域端侧接入、缓存和协议汇聚。</p>
+              </article>
+              <article class="device ops">
+                <h4>庭院灯 / 高杆灯 / 投光灯</h4>
+                <p>灯光状态、开关、调光、策略执行。</p>
+              </article>
+              <article class="device sports">
+                <h4>星闪 Mesh 与运动手环</h4>
+                <p>运动互动、定位联动、近场感知。</p>
+              </article>
+              <article class="device commerce">
+                <h4>NFC / 星闪标识牌</h4>
+                <p>碰一碰入口、导览、消费娱乐触点。</p>
+              </article>
+              <article class="device commerce">
+                <h4>音响 / 屏幕 / 拾音器</h4>
+                <p>灯杆互动、播报、基础媒体控制。</p>
+              </article>
+              <article class="device ops">
+                <h4>光感 / 水位 / 土壤等简单传感</h4>
+                <p>明确寄存器、明确点位的采集设备。</p>
+              </article>
+              <article class="device ops">
+                <h4>RS485 / Modbus 简单设备</h4>
+                <p>标准寄存器设备按插件化方式接入。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="access-col assume">
+            <div class="access-head">
+              <h2>Assume 走网关</h2>
+              <p>暂按网关路径设计，但必须在协议、点表、调试成本确认后落定。</p>
+            </div>
+            <div class="device-list">
+              <article class="device ops">
+                <h4>简单 SOS 终端</h4>
+                <p>若仅为按钮、状态、告警点位，可网关化；若含平台服务则转服务器②。</p>
+              </article>
+              <article class="device ops">
+                <h4>简单水电表</h4>
+                <p>DL/T645、Modbus 等点表明确时可评估网关直采。</p>
+              </article>
+              <article class="device ops">
+                <h4>摄像机状态点位</h4>
+                <p>仅状态、供电、故障等轻量点位可评估；视频流不走网关。</p>
+              </article>
+              <article class="device sports">
+                <h4>运动设施传感点位</h4>
+                <p>跑道、健身器材等简单计数或状态信号。</p>
+              </article>
+              <article class="device ops">
+                <h4>气象站 / 液位 / 电子水尺</h4>
+                <p>若协议简单、频率低、点表稳定，可归入网关插件。</p>
+              </article>
+              <article class="device commerce">
+                <h4>轻量互动按钮与触发器</h4>
+                <p>用于消费娱乐或导览场景的本地触发点。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="access-col server2">
+            <div class="access-head">
+              <h2>复杂系统走服务器②</h2>
+              <p>平台型、厂商系统、视频流、多接口联动或验收责任复杂的系统进入中台接入。</p>
+            </div>
+            <div class="device-list">
+              <article class="device ops">
+                <h4>停车场系统</h4>
+                <p>车牌、闸机、收费、车位、厂商平台 API。</p>
+              </article>
+              <article class="device ops">
+                <h4>门禁 / 闸机系统</h4>
+                <p>权限、通行记录、联动策略、人员或票务系统。</p>
+              </article>
+              <article class="device ops">
+                <h4>视频平台 / NVR / 摄像机视频流</h4>
+                <p>GB28181、ISAPI、流媒体、录像和转码。</p>
+              </article>
+              <article class="device ops">
+                <h4>充电桩 / 光伏 / 储能</h4>
+                <p>能源设备、计费、功率策略和厂商云平台。</p>
+              </article>
+              <article class="device ops">
+                <h4>水肥一体机 / 水库既有设备</h4>
+                <p>多设备联动、既有控制系统、验收边界复杂。</p>
+              </article>
+              <article class="device commerce">
+                <h4>售卖机 / 商业系统</h4>
+                <p>订单、支付、库存、经营数据和第三方平台。</p>
+              </article>
+              <article class="device sports">
+                <h4>赛事 / 活动平台接口</h4>
+                <p>活动配置、成绩、排行榜和小程序业务联动。</p>
+              </article>
+              <article class="device ops">
+                <h4>机器人 / 无人车平台</h4>
+                <p>若后续纳入，按平台 API 与安全边界接入。</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="notes">
+        <article class="note">
+          <h3>接入原则</h3>
+          <p>不按物理就近强制所有设备进入网关。依据协议复杂度、复用价值、开发成本、调试成本和本项目交付风险判断接入路径。</p>
+        </article>
+        <article class="note">
+          <h3>数据与闭环</h3>
+          <p>服务器②负责统一物模型和平台同步；本地实时闭环优先在网关或服务器②完成，服务器①通过 API 消费能力。</p>
+        </article>
+        <article class="note risk">
+          <h3>风险标注</h3>
+          <p>Assume 走网关设备未完成协议、点表和供应商配合确认前，不应进入固定开发报价或验收承诺。</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      依据：DS-20260503-003 唯一数据源；D-20260504-002 网关接入边界评估原则；D-20260504-003 项目关键时间节点；C-20260503-001 清单符合性约束；C-20260504-003 不采用独立中间转换层约束。更新时间：2026-05-04。
+    </footer>
+  </section>
+</body>
+</html>

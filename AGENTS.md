@@ -1,5 +1,44 @@
 # AI Project Operating Rules
 
+## Multi-Agent Architecture
+
+本项目采用 10 Agent 分工架构。每个 Agent 接入前须读取本文件及对应角色规则文件。
+
+### 决策者
+
+**你（总项目负责人）** 是唯一决策者。架构变更、SSOT 修改、MEMORY 写入均须你确认。
+
+### Agent 角色与输出文档
+
+| Agent 规则文件 | 角色 | 输出文档 |
+|---------------|------|---------|
+| `AGENTS/INTEGRATION.md` | 总集成与软件架构 | DS-20260504-001 |
+| `AGENTS/GATEWAY.md` | 网关端侧软件 | DS-20260504-002 |
+| `AGENTS/SERVER2.md` | 服务器② IoT 中间层 | DS-20260504-003 |
+| `AGENTS/DATABASE.md` | 数据库与数据平台 | DS-20260504-004 |
+| `AGENTS/SERVER1.md` | 服务器①闪电智能体 | DS-20260504-005 |
+| `AGENTS/FRONTEND.md` | 前端应用 | DS-20260504-006 |
+| `AGENTS/VIDEO.md` | 视频与流媒体 | DS-20260504-007 |
+| `AGENTS/DEVOPS.md` | 运维部署与安全 | DS-20260504-008 |
+| `AGENTS/PROCUREMENT.md` | 采购 | DS-20260504-009 |
+| `AGENTS/CONSTRUCTION.md` | 现场施工管理 | DS-20260504-010 |
+
+### 唯一数据源（SSOT）
+
+`DS-20260503-003`（最终智能化清单 Google Sheet）是项目唯一数据源。
+
+**变更传播规则（自上而下）：**
+1. 架构变更 → 先更新 SSOT → 总集成 Agent 更新架构规格 → 各域 Agent 更新需求文档 → 采购 Agent 校验一致性
+
+**反馈规则（自下而上）：**
+2. 域 Agent 发现问题 → 报告总集成 Agent → 总集成 Agent 上报你 → 你确认 → 更新 SSOT → 触发自上而下传播
+
+### 每个 Agent 接入时必须额外读取
+
+自己的角色规则文件（`AGENTS/<ROLE>.md`），确认可写范围和禁止写入范围。
+
+
+
 ## Required Data Sources
 
 Before making any project judgment, plan, recommendation, or code change, every AI tool must read:

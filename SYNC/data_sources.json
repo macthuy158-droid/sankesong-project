@@ -2,15 +2,14 @@
   "sources": [
     {
       "id": "DS-20260503-001",
-      "name": "项目 data 在线表格",
+      "name": "项目 data 在线表格（微信文档）",
       "type": "online_spreadsheet",
-      "role": "primary_worklist_review",
-      "status": "url_recorded_access_blocked",
+      "role": "deprecated",
+      "status": "deprecated",
       "url": "https://doc.weixin.qq.com/sheet/e3_AXoAfQaUAIACNsDplpOuiT3yvq1Te?scode=AI4Asgd9ABMzJ19o4gAXoAfQaUAIA&tab=000003",
-      "description": "项目最新工作清单的第一审阅来源。AI 在判断任务状态、优先级、负责人、进度和 blocker 前，应优先检查此表格；SYNC/project_data.json 是其结构化同步快照。",
-      "sync_target": "SYNC/project_data.json",
-      "access_note": "URL has been provided, but Codex web access could not open the Weixin document directly. Treat latest-worklist review as blocked unless the table is exported, shared in an accessible format, or manually synchronized.",
-      "updated_at": "2026-05-03"
+      "description": "原微信文档工作清单。已确认由 DS-20260503-003 替代作为唯一数据源（SSOT）。AI 工具不应再将此作为权威来源。",
+      "access_note": "AI 无法访问微信文档，且已被 DS-20260503-003 替代。",
+      "updated_at": "2026-05-04"
     },
     {
       "id": "DS-20260503-002",
@@ -19,19 +18,30 @@
       "role": "primary_document_repository",
       "status": "active",
       "url": "https://drive.google.com/drive/u/0/folders/1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO",
-      "description": "项目在线文档管理文件夹，用于存放项目管理、商务合同、技术方案、智慧化施工、软件开发、联调记录、汇报材料、运维和参考资料等文件。",
-      "access_note": "Codex Google Drive connector can list this folder. The project data spreadsheet has not been placed in this folder yet.",
-      "updated_at": "2026-05-03"
+      "folder_id": "1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO",
+      "description": "项目在线文档管理文件夹，归档 10 个 Agent 输出文档及所有项目文档。",
+      "subfolders": {
+        "01_项目管理": "1dSH07VHPpmRZrdS-ppdSS3UEtfMLMFqz",
+        "02_商务合同": "1xJFUJy_wyV-qEwRGRRkU6lCKVCbl_O6P",
+        "03_技术方案": "1yc-Xw8E4SUEJfbviWxsgNlkI7JLtU8Gl",
+        "04_智慧化施工": "11thZB9vdunv045VKfxswUxPlXEeTn2DH",
+        "05_软件开发": "1ff3mPihI5X1GozoYlQAKSTS4MWrkuDXN",
+        "06_联调记录": "1UoXckDVt816d4GaBymV1zxxbWe4_z2x2",
+        "07_汇报材料": "1zzw3O97RzxeQir3x1wCkasTuwsRs2oQ-",
+        "08_运维（开园后）": "1jjjDTEXHA90PF8DkcIKQO1pcGM9KqPfo",
+        "09 参考资料": "1d6Nu4PPyZCzzwzlESkkTcCNRiaU61-OB"
+      },
+      "access_note": "Google Drive MCP 连接器可读写此文件夹。",
+      "updated_at": "2026-05-04"
     },
     {
       "id": "DS-20260503-003",
       "name": "20260421 最终智能化清单",
       "type": "google_sheet",
-      "role": "technical_scope_baseline",
+      "role": "primary_ssot",
       "status": "active_cell_readable",
       "url": "https://docs.google.com/spreadsheets/d/1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48/edit?gid=1194902564#gid=1194902564",
-      "description": "项目最终智能化清单，作为设备、系统、技术要求、报价和输出内容的范围符合性基准。",
-      "file_name": "20260421 最终智能化清单",
+      "description": "项目唯一数据源（SSOT）。同时作为技术范围基准和工作清单。架构变更必须先更新此清单，再由各 Agent 同步其开发需求文档和采购清单。",
       "file_id": "1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48",
       "mime_type": "application/vnd.google-apps.spreadsheet",
       "sheets": [
@@ -40,20 +50,151 @@
         "综合运维",
         "公园管理平台对接",
         "智慧游玩硬件设施",
-        "”闪电“智能体",
+        ""闪电"智能体",
         "前端应用开发",
         "智慧厕所",
         "建筑物门禁、网络、机房装饰",
         "指挥中心",
         "弱电机房"
       ],
-      "access_note": "Native Google Sheet is accessible through the Google Drive connector. Structured cell reading has been verified on sheet 鸿蒙多功能灯杆 range A1:Z10.",
-      "updated_at": "2026-05-03"
+      "access_note": "AI 可直接读取。架构变更先改此清单，再下发各 Agent。",
+      "updated_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-001",
+      "name": "【总集成】软件架构规格",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/integration",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1c-XV34GgyOLnPDgDk8iV2SJoeggAqvtDJAID5yj_Jyk/edit",
+      "file_id": "1c-XV34GgyOLnPDgDk8iV2SJoeggAqvtDJAID5yj_Jyk",
+      "drive_folder": "03_技术方案",
+      "description": "总体软件架构规格，接口规范，数据规范，联调验收计划。由总集成 Agent 维护，架构变更时首先更新此文档。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-002",
+      "name": "【网关】端侧软件开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/gateway",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1C211mIoKT1Yjs_WEfhSkhybam8L7HmHdehPFRnMOT8A/edit",
+      "file_id": "1C211mIoKT1Yjs_WEfhSkhybam8L7HmHdehPFRnMOT8A",
+      "drive_folder": "05_软件开发",
+      "description": "网关端侧设备接入、星闪、NFC、本地闭环开发需求。由网关 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-003",
+      "name": "【服务器②】IoT中间层开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/server2",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1K7EWzxIHcWE7L59cBzN9IZ14z7kvoryne67sNhkv4AI/edit",
+      "file_id": "1K7EWzxIHcWE7L59cBzN9IZ14z7kvoryne67sNhkv4AI",
+      "drive_folder": "05_软件开发",
+      "description": "服务器② IoT 中间层、物模型、Meta 对接、复杂系统接入开发需求。由服务器② Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-004",
+      "name": "【数据库】数据平台开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/database",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1g9XX6o9XJAyVhoaLrdIo9nG9h8KQjf05wcaeXxGdNuw/edit",
+      "file_id": "1g9XX6o9XJAyVhoaLrdIo9nG9h8KQjf05wcaeXxGdNuw",
+      "drive_folder": "05_软件开发",
+      "description": "PostgreSQL、TimescaleDB、ChromaDB、Redis、数据字典开发需求。由数据库 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-005",
+      "name": "【服务器①】闪电智能体开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/server1",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/16V-Ep0vCqLLffIJbGrnugA11cnyakcwsRd9RUtMX09g/edit",
+      "file_id": "16V-Ep0vCqLLffIJbGrnugA11cnyakcwsRd9RUtMX09g",
+      "drive_folder": "05_软件开发",
+      "description": "闪电智能体、大模型、RAG、ASR/TTS、数字人开发需求。由服务器① Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-006",
+      "name": "【前端】应用开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/frontend",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1JoDIvfFn3mAifNe306MIowenC2n65PZE0PB8SjjE5NQ/edit",
+      "file_id": "1JoDIvfFn3mAifNe306MIowenC2n65PZE0PB8SjjE5NQ",
+      "drive_folder": "05_软件开发",
+      "description": "小程序、鸿蒙元服务、灯杆屏、瀑布屏、管理后台开发需求。由前端 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-007",
+      "name": "【视频】流媒体开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/video",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1xdXk4TPbdnFL1ntRPEbP3YgyLXbwlEfaSbhXwrO-Nqg/edit",
+      "file_id": "1xdXk4TPbdnFL1ntRPEbP3YgyLXbwlEfaSbhXwrO-Nqg",
+      "drive_folder": "05_软件开发",
+      "description": "摄像机接入、NVR、GB28181、直播、转码开发需求。由视频 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-008",
+      "name": "【运维】部署与安全开发需求",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/devops",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1jutDcSRvj7xeuCqMxC9b2UtcxwU2Nv2FztyzL6Y8KWM/edit",
+      "file_id": "1jutDcSRvj7xeuCqMxC9b2UtcxwU2Nv2FztyzL6Y8KWM",
+      "drive_folder": "05_软件开发",
+      "description": "部署、监控、日志、备份、SSL、权限开发需求。由运维 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-009",
+      "name": "【采购】智慧化设备采购清单",
+      "type": "google_sheet",
+      "role": "agent_output",
+      "agent": "agent/procurement",
+      "status": "active",
+      "url": "https://docs.google.com/spreadsheets/d/1oL4atrvUTmtD7_EwqMP0CP5GI2GMN-5ymDCIjgMNj6o/edit",
+      "file_id": "1oL4atrvUTmtD7_EwqMP0CP5GI2GMN-5ymDCIjgMNj6o",
+      "drive_folder": "04_智慧化施工",
+      "description": "全园智慧化设备采购清单，参数校验与 DS-20260503-003 一致性，供应商，到货状态。由采购 Agent 维护。",
+      "created_at": "2026-05-04"
+    },
+    {
+      "id": "DS-20260504-010",
+      "name": "【施工】现场施工管理记录",
+      "type": "google_doc",
+      "role": "agent_output",
+      "agent": "agent/construction",
+      "status": "active",
+      "url": "https://docs.google.com/document/d/1FRkAdZ3kUhuab-1WBBxwNKh9YxY2NPotw90C1R0kbtA/edit",
+      "file_id": "1FRkAdZ3kUhuab-1WBBxwNKh9YxY2NPotw90C1R0kbtA",
+      "drive_folder": "04_智慧化施工",
+      "description": "施工日志、现场记录、设备安装确认、验收跟踪。由施工管理 Agent 维护，轻耦合消费清单数据。",
+      "created_at": "2026-05-04"
     }
   ],
   "meta": {
-    "status": "initialized",
-    "note": "The online spreadsheet URL has been recorded, but direct Codex access is currently blocked. AI tools must mark online worklist review as blocked unless the table is exported, shared in an accessible format, or manually synchronized.",
-    "updated_at": "2026-05-03"
+    "status": "active",
+    "ssot": "DS-20260503-003",
+    "note": "DS-20260503-003 为项目唯一数据源（SSOT）。架构变更先改 SSOT，再由各 Agent 更新其输出文档（DS-20260504-001 至 DS-20260504-010）。DS-20260503-001 微信文档已废弃。",
+    "updated_at": "2026-05-04"
   }
 }

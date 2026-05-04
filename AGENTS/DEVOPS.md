@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-008`：[【运维】部署与安全开发需求](https://docs.google.com/document/d/1jutDcSRvj7xeuCqMxC9b2UtcxwU2Nv2FztyzL6Y8KWM/edit)
+- `DS-20260504-008`：[【运维】部署与安全开发需求](https://docs.google.com/document/d/1mi8dBVoUz0Xpe3ypS0RgX_N_jfQM-b7Ei0seQgx6kxE/edit)
 
 ## 可写范围
 

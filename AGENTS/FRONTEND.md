@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-006`：[【前端】应用开发需求](https://docs.google.com/document/d/1JoDIvfFn3mAifNe306MIowenC2n65PZE0PB8SjjE5NQ/edit)
+- `DS-20260504-006`：[【前端】应用开发需求](https://docs.google.com/document/d/1pFdBUw5UL9gKV24J6Eykg90ulsocjHx1wpzD2F__X-8/edit)
 
 ## 可写范围
 

@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-004`：[【数据库】数据平台开发需求](https://docs.google.com/document/d/1g9XX6o9XJAyVhoaLrdIo9nG9h8KQjf05wcaeXxGdNuw/edit)
+- `DS-20260504-004`：[【数据库】数据平台开发需求](https://docs.google.com/document/d/1g4OahLOOv4py4-Xe5Z0tZTvacDrA7PogZS3WKJgNJjM/edit)
 
 ## 可写范围
 

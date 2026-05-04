@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-007`：[【视频】流媒体开发需求](https://docs.google.com/document/d/1xdXk4TPbdnFL1ntRPEbP3YgyLXbwlEfaSbhXwrO-Nqg/edit)
+- `DS-20260504-007`：[【视频】流媒体开发需求](https://docs.google.com/document/d/1CJ3q6KgL_uEv50vqU6MA1jtAUgVm7DUT6m84z_apIBc/edit)
 
 ## 可写范围
 

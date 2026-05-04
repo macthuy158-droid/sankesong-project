@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-003`：[【服务器②】IoT中间层开发需求](https://docs.google.com/document/d/1K7EWzxIHcWE7L59cBzN9IZ14z7kvoryne67sNhkv4AI/edit)
+- `DS-20260504-003`：[【服务器②】IoT中间层开发需求](https://docs.google.com/document/d/10xRP107O3n-x69_m_vyTlCAwGKBQvA_-1_rLC4YWQic/edit)
 
 ## 可写范围
 

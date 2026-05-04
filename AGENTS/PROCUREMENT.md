@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-009`：[【采购】智慧化设备采购清单](https://docs.google.com/spreadsheets/d/1oL4atrvUTmtD7_EwqMP0CP5GI2GMN-5ymDCIjgMNj6o/edit)（Google Sheet）
+- `DS-20260504-009`：[【采购】智慧化设备采购清单](https://docs.google.com/spreadsheets/d/183MA1ertg5iGOOMO_sNd_LuqFU4pWbZyJ0cbadJeOEg/edit)（Google Sheet）
 
 ## 可写范围
 

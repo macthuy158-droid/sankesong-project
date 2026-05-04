@@ -6,7 +6,7 @@
 
 ## 输出文档
 
-- `DS-20260504-010`：[【施工】现场施工管理记录](https://docs.google.com/document/d/1FRkAdZ3kUhuab-1WBBxwNKh9YxY2NPotw90C1R0kbtA/edit)
+- `DS-20260504-010`：[【施工】现场施工管理记录](https://docs.google.com/document/d/1Map26i3lLZ5FApysHeVLQfLhv-xqIIfPHDiVP3x4eCE/edit)
 
 ## 可写范围
 

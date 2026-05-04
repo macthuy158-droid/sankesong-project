@@ -27,6 +27,8 @@
 
 `DS-20260503-003`（最终智能化清单 Google Sheet）是项目唯一数据源。
 
+其他在线表格、同步快照和 Agent 输出文档只能作为参考或输出物，不得替代 SSOT。原 `DS-20260503-001` 微信 data 在线表格已废弃；`SYNC/project_data.json` 仅保留为可选同步快照，不再作为权威工作清单。
+
 **变更传播规则（自上而下）：**
 1. 架构变更 → 先更新 SSOT → 总集成 Agent 更新架构规格 → 各域 Agent 更新需求文档 → 采购 Agent 校验一致性
 
@@ -49,15 +51,15 @@ Before making any project judgment, plan, recommendation, or code change, every 
 - `MEMORY/constraints.json`
 - `MEMORY/memory_graph.json`
 
-These files are the authoritative sources for project data source registration, synchronized project progress, project decisions, project constraints, and project memory topology.
+These files are the required shared context for project data source registration, optional synchronized snapshots, project decisions, project constraints, and project memory topology. For project status, scope, equipment, procurement, and Agent output alignment, `DS-20260503-003` is the authority.
 
 ## Mandatory Behavior
 
 - Check `SYNC/data_sources.json` before judging project progress.
-- Treat the registered project data online spreadsheet as the primary review source for the latest worklist.
-- Treat `SYNC/project_data.json` as the structured synchronized snapshot of the online worklist.
-- If the online spreadsheet URL is missing or inaccessible, mark latest-worklist review as blocked and avoid inventing task status.
-- Base all output on the current synchronized project progress in `SYNC/project_data.json`, while noting whether it has been checked against the online spreadsheet.
+- Treat `DS-20260503-003` as the single source of truth (SSOT) for project scope, worklist, equipment, procurement, and Agent output alignment.
+- Treat `SYNC/project_data.json` only as an optional synchronized snapshot, not as an authority.
+- If `DS-20260503-003` is missing or inaccessible, mark SSOT review as blocked and avoid inventing task status or scope.
+- Base all output on the current SSOT content in `DS-20260503-003`, while noting whether the relevant sheet and range have been checked.
 - Check all proposed actions against decisions in `MEMORY/decisions.json`.
 - Check all proposed actions against constraints in `MEMORY/constraints.json`.
 - Use `MEMORY/memory_graph.json` to place new information into the correct project memory domain.
@@ -144,13 +146,13 @@ Before changing the graph structure, the AI tool must:
 
 After confirmation, update `MEMORY/memory_graph.json` and preserve existing node IDs whenever possible. If a node must be replaced, keep the old node traceable by adding a relationship or migration note rather than silently deleting context.
 
-Graph updates should not be used to record ordinary task progress. Ordinary progress belongs in `SYNC/project_data.json`; decisions belong in `MEMORY/decisions.json`; rejected or forbidden items belong in `MEMORY/constraints.json`.
+Graph updates should not be used to record ordinary task progress. Ordinary progress belongs in the SSOT first and may be synchronized into `SYNC/project_data.json`; decisions belong in `MEMORY/decisions.json`; rejected or forbidden items belong in `MEMORY/constraints.json`.
 
-## Online Worklist Source
+## Single Source of Truth
 
-The project data online spreadsheet is the first review source for the latest worklist. Its registration belongs in `SYNC/data_sources.json`.
+`DS-20260503-003` is the project single source of truth (SSOT). Its registration belongs in `SYNC/data_sources.json`.
 
-When the online spreadsheet changes, AI tools should synchronize its relevant rows into `SYNC/project_data.json` using the established fields:
+When the SSOT changes, AI tools may synchronize relevant rows into `SYNC/project_data.json` using the established fields:
 
 - `type`
 - `name`
@@ -160,20 +162,20 @@ When the online spreadsheet changes, AI tools should synchronize its relevant ro
 - `progress`
 - `blocker`
 
-If the online spreadsheet and `SYNC/project_data.json` conflict, the AI tool must flag the conflict, prefer the online spreadsheet for latest status, and update the JSON snapshot only after the intended sync is clear.
+If `DS-20260503-003` and `SYNC/project_data.json` conflict, the AI tool must flag the conflict, prefer `DS-20260503-003`, and update the JSON snapshot only after the intended sync is clear.
 
 ## Online Document Repository
 
 The Google Drive project folder registered in `SYNC/data_sources.json` is the primary online document repository.
 
-AI tools should use this folder when checking project documents, source materials, exported files, or generated project artifacts. The document repository does not replace the online worklist source; the worklist spreadsheet remains the first review source for latest task status once available.
+AI tools should use this folder when checking project documents, source materials, exported files, or generated project artifacts. The document repository does not replace `DS-20260503-003`; the SSOT remains the authority for latest project scope and worklist.
 
 When generating or organizing project documents, AI tools should place the artifact in the Google Drive subfolder that matches `MEMORY/memory_graph.json`. If the correct destination is unclear, the AI tool must state the likely memory domain and ask for confirmation before filing.
 
-Decision and constraint records should stay structurally aligned with the memory graph and Drive folder structure. Project data updates remain governed by the project online worklist source and synchronized into `SYNC/project_data.json`.
+Decision and constraint records should stay structurally aligned with the memory graph and Drive folder structure. Project data updates remain governed by `DS-20260503-003` and may be synchronized into `SYNC/project_data.json`.
 
 ## Final Smartization List
 
-`DS-20260503-003` in `SYNC/data_sources.json` is the technical scope baseline. All project outputs must conform to this list. If exact row-level verification is required but the list is not available as a readable native Google Sheet or exported file, the AI tool must mark final-list verification as a risk.
+`DS-20260503-003` in `SYNC/data_sources.json` is the project SSOT and technical scope baseline. All project outputs must conform to this list. If exact row-level verification is required but the list is not available as a readable native Google Sheet or exported file, the AI tool must mark SSOT verification as a risk.
 
 The current `DS-20260503-003` source is a readable native Google Sheet. AI tools must select the relevant worksheet and range before making equipment, system, quantity, or technical-scope claims.

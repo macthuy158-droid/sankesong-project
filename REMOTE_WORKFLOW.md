@@ -54,7 +54,7 @@ MEMORY/memory_graph.json
 - `AGENTS.md`：AI 执行规则
 - `AI_PROJECT_WORK_ARCHITECTURE.md`：项目快速接入说明
 - `SYNC/data_sources.json`：在线数据源注册表
-- `SYNC/project_data.json`：项目进度同步快照
+- `SYNC/project_data.json`：SSOT 的可选同步快照，不作为权威来源
 - `MEMORY/decisions.json`：长期决策记录
 - `MEMORY/constraints.json`：禁止事项和约束记录
 - `MEMORY/memory_graph.json`：项目记忆图谱
@@ -63,14 +63,14 @@ MEMORY/memory_graph.json
 
 ### 最终智能化清单
 
-技术范围基准：
+项目唯一数据源（SSOT）：
 
 https://docs.google.com/spreadsheets/d/1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48/edit?gid=1194902564#gid=1194902564
 
 约束：
 
-- 所有方案、需求、报价、设备范围和分工必须符合此清单。
-- 涉及设备、系统、数量、范围、供应商时，应优先核对该表。
+- 所有方案、需求、报价、设备范围、分工、采购范围和 Agent 输出必须符合此清单。
+- 涉及项目状态、设备、系统、数量、范围、供应商、采购或技术方案时，必须核对该表。
 
 ### Google Drive 项目文件夹
 
@@ -84,16 +84,16 @@ https://drive.google.com/drive/u/0/folders/1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO
 - Git 仓库保存结构化规则、记忆、需求和协作流程。
 - Google Drive 保存在线协作文档和正式资料。
 
-### 项目 data 在线表格
+### 项目 data 在线表格（已废弃）
 
-项目最新工作清单第一审阅来源：
+原微信 data 在线表格已被 `DS-20260503-003` 替代，不再作为权威来源：
 
 https://doc.weixin.qq.com/sheet/e3_AXoAfQaUAIACNsDplpOuiT3yvq1Te?scode=AI4Asgd9ABMzJ19o4gAXoAfQaUAIA&tab=000003
 
 当前风险：
 
-- AI 可能无法直接读取微信表格。
-- 如需 AI 使用，应人工导出或同步到 `SYNC/project_data.json`。
+- AI 不应再将该表作为项目判断依据。
+- 如历史资料需要迁移，应先进入 `DS-20260503-003`，再由各 Agent 同步输出文档。
 
 ## Git 工作原则
 
@@ -148,12 +148,13 @@ AI 接到任务后，必须按以下顺序执行：
 
 ## 当前必须遵守的决策
 
-- `D-20260503-001`：所有 AI 使用统一数据源和统一记忆机制。
+- `D-20260503-001`：所有 AI 使用统一数据源和统一记忆机制；其中数据权威口径已被 `D-20260504-001` 部分覆盖。
 - `D-20260503-002`：AI 识别到决策或禁止事项时，必须主动询问是否写入。
 - `D-20260503-003`：项目记忆按记忆图谱结构组织。
-- `D-20260503-004`：在线工作清单是第一审阅来源。
-- `D-20260503-005`：Google Drive 文件夹结构要与记忆图谱一致。
+- `D-20260503-004`：已被 `D-20260504-001` 覆盖。
+- `D-20260503-005`：Google Drive 文件夹结构要与记忆图谱一致；其中数据权威口径已被 `D-20260504-001` 部分覆盖。
 - `D-20260503-006`：深开鸿不参与三棵松项目实施；区 Meta 平台团队提供对接文档和技术支持；我方或服务器二分包方负责实现接入、联调和验收。
+- `D-20260504-001`：`DS-20260503-003` 是项目唯一数据源（SSOT）。
 
 ## 当前必须遵守的约束
 
@@ -232,8 +233,7 @@ git pull --ff-only
 
 项目规则：
 
-- 在线工作清单是第一审阅来源。
-- 最终智能化清单是技术范围基准：
+- 最终智能化清单是项目唯一数据源（SSOT）：
   https://docs.google.com/spreadsheets/d/1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48/edit?gid=1194902564#gid=1194902564
 - Google Drive 项目文件夹是在线文档归档位置：
   https://drive.google.com/drive/u/0/folders/1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO
@@ -246,4 +246,3 @@ git pull --ff-only
 - 复杂系统如停车、门禁、海康平台等通过服务器二接入。
 - 服务器二负责复杂系统接入、协议转换、数据汇聚、统一物模型和 Meta 对接。
 ```
-

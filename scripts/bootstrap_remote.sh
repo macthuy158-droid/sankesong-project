@@ -87,8 +87,7 @@ cat <<'EOF'
 
 项目规则：
 
-- 在线工作清单是第一审阅来源。
-- 最终智能化清单是技术范围基准：
+- 最终智能化清单是项目唯一数据源（SSOT）：
   https://docs.google.com/spreadsheets/d/1_7GxEisIwnplS1n5TT6q07i-40zQsaa_Ypzdqe3vF48/edit?gid=1194902564#gid=1194902564
 - Google Drive 项目文件夹是在线文档归档位置：
   https://drive.google.com/drive/u/0/folders/1fMSi1Rs9ejQN3GKFxq1PZwjQ07P9M5aO

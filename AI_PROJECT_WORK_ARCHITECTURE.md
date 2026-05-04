@@ -19,11 +19,11 @@ Before making recommendations, generating documents, editing files, or judging p
 
 `SYNC/data_sources.json` registers online and offline authority sources.
 
-- `DS-20260503-001`: 项目 data 在线表格，intended primary worklist review source. Current status: Weixin document URL recorded, but direct AI access is blocked.
+- `DS-20260503-001`: 项目 data 在线表格（微信文档），deprecated. It is no longer an authority source.
 - `DS-20260503-002`: Google Drive 在线项目文件夹，primary online document repository. Current status: active.
-- `DS-20260503-003`: `20260421 最终智能化清单`, technical scope baseline. Current status: active native Google Sheet with structured cell reading verified.
+- `DS-20260503-003`: `20260421 最终智能化清单`, project single source of truth (SSOT). Current status: active native Google Sheet with structured cell reading verified.
 
-`SYNC/project_data.json` is the structured synchronized snapshot of the project worklist. Current status: no tasks synchronized yet.
+`SYNC/project_data.json` is an optional structured synchronized snapshot of the SSOT. Current status: no tasks synchronized yet. It is not authoritative.
 
 `MEMORY/decisions.json` stores long-term project decisions.
 
@@ -33,11 +33,12 @@ Before making recommendations, generating documents, editing files, or judging p
 
 ## Current Decisions
 
-- `D-20260503-001`: AI tools must read shared project data and decision sources before execution.
+- `D-20260503-001`: AI tools must read shared project data and decision sources before execution. Its authority wording is partially superseded by `D-20260504-001`.
 - `D-20260503-002`: AI must proactively ask whether to record decision-related or prohibition-related statements.
 - `D-20260503-003`: Project memory follows the file management architecture and is maintained through `MEMORY/memory_graph.json`.
-- `D-20260503-004`: The online worklist is the first review source; `SYNC/project_data.json` is its structured snapshot.
-- `D-20260503-005`: Google Drive folder filing and project memory structure must stay aligned.
+- `D-20260503-004`: Superseded by `D-20260504-001`.
+- `D-20260503-005`: Google Drive folder filing and project memory structure must stay aligned. Its data-source wording is partially superseded by `D-20260504-001`.
+- `D-20260504-001`: `DS-20260503-003` is the project single source of truth (SSOT).
 
 ## Current Constraints
 
@@ -62,8 +63,8 @@ Use `MEMORY/memory_graph.json` to classify work into these domains:
 
 1. Read all required sources.
 2. Identify the requested work type: status judgment, document generation, technical proposal, file organization, decision capture, constraint capture, or data sync.
-3. Check whether the request depends on the latest worklist. If yes, check `DS-20260503-001` and `SYNC/project_data.json`; if unavailable or empty, mark the latest-worklist review as blocked.
-4. Check whether the request depends on technical scope or equipment details. If yes, check `DS-20260503-003`; if cell-level access is blocked, mark final-list verification as a risk.
+3. Check whether the request depends on project status, task scope, equipment, procurement, or technical scope. If yes, check `DS-20260503-003`; if cell-level access is blocked, mark SSOT verification as a risk.
+4. Treat `SYNC/project_data.json` only as an optional snapshot. If it conflicts with `DS-20260503-003`, prefer `DS-20260503-003`.
 5. Check all decisions and constraints for conflicts.
 6. Map the work to the correct memory graph node and Drive folder.
 7. Produce output with cited decision/constraint IDs and explicit risks.
@@ -89,15 +90,15 @@ If the correct destination is unclear, state the likely folder and ask before fi
 
 ## Data Update Boundary
 
-The project online worklist controls project status updates. Do not invent tasks, owners, progress, blockers, or stage data.
+`DS-20260503-003` controls project status, scope, equipment, procurement, and Agent output alignment. Do not invent tasks, owners, progress, blockers, stage data, equipment scope, or technical scope.
 
-Use `SYNC/project_data.json` only as a synchronized snapshot. If online source and local snapshot conflict, prefer the online source and flag the conflict before updating the snapshot.
+Use `SYNC/project_data.json` only as an optional synchronized snapshot. If the SSOT and local snapshot conflict, prefer `DS-20260503-003` and flag the conflict before updating the snapshot.
 
 ## Known Blockers
 
-- `DS-20260503-001`: Weixin online worklist link is recorded but direct AI access is blocked.
-- `SYNC/project_data.json`: no worklist rows have been synchronized.
-- `DS-20260503-003`: final smartization list is now readable as a native Google Sheet. The remaining risk is selecting and checking the correct worksheet/range for each task.
+- `DS-20260503-001`: Weixin online worklist is deprecated and should not be used as an authority source.
+- `SYNC/project_data.json`: no rows have been synchronized; it is not authoritative.
+- `DS-20260503-003`: SSOT is readable as a native Google Sheet. The remaining risk is selecting and checking the correct worksheet/range for each task.
 - Existing Drive files can be listed and inspected, but current Drive connector does not expose a direct move/update-parent operation for existing files.
 
 ## Standard Output Template
@@ -123,5 +124,5 @@ You are working on the 三棵松鸿蒙公园智慧化项目. Before doing anythi
 5. MEMORY/memory_graph.json
 6. AGENTS.md
 
-Follow the project memory graph and Google Drive folder structure. Cite relevant decision and constraint IDs. All outputs must conform to DS-20260503-003《20260421 最终智能化清单》; check the relevant worksheet/range before making equipment, system, quantity, or technical-scope claims. Do not invent project progress. Ask for confirmation before recording new decisions or constraints.
+Follow the project memory graph and Google Drive folder structure. Cite relevant decision and constraint IDs. DS-20260503-003《20260421 最终智能化清单》 is the project SSOT; check the relevant worksheet/range before making project status, equipment, system, quantity, procurement, or technical-scope claims. Do not invent project progress. Ask for confirmation before recording new decisions or constraints.
 ```

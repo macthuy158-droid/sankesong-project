@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>三棵松鸿蒙公园整体架构图 v7</title>
+  <style>
+    :root {
+      --ink: #18202a;
+      --muted: #647082;
+      --line: #cdd6e1;
+      --paper: #f7f9fc;
+      --panel: #ffffff;
+      --gateway: #e9f7ef;
+      --gateway-border: #49a76d;
+      --assume: #fff6df;
+      --assume-border: #d99b24;
+      --server: #edf3ff;
+      --server-border: #4c78c7;
+      --ai: #f1eefc;
+      --ai-border: #7b61c8;
+      --danger: #fff0f0;
+      --danger-border: #d45b5b;
+      --shadow: 0 14px 32px rgba(24, 32, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 820px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .main-layout {
+      grid-template-columns: 1.18fr 0.82fr;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .diagram {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lane-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .device-columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .bucket {
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 190px;
+    }
+
+    .bucket.gateway {
+      background: var(--gateway);
+      border-color: var(--gateway-border);
+    }
+
+    .bucket.assume {
+      background: var(--assume);
+      border-color: var(--assume-border);
+    }
+
+    .bucket.server {
+      background: var(--server);
+      border-color: var(--server-border);
+    }
+
+    .bucket .rule {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      border: 1px solid rgba(24, 32, 42, 0.14);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 13px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 96px 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .system {
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--panel);
+      min-height: 140px;
+    }
+
+    .system.gateway-box {
+      border-color: var(--gateway-border);
+      background: #f4fbf7;
+    }
+
+    .system.server2-box {
+      border-color: var(--server-border);
+      background: #f7faff;
+    }
+
+    .system.ai-box {
+      border-color: var(--ai-border);
+      background: #faf8ff;
+    }
+
+    .system.external-box {
+      border-color: #8894a5;
+      background: #fbfcfe;
+    }
+
+    .system ul,
+    .note-list,
+    .risk-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      position: relative;
+    }
+
+    .arrow::before {
+      content: "";
+      width: 2px;
+      height: 100%;
+      min-height: 54px;
+      background: var(--line);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .arrow::after {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+      transform: rotate(45deg);
+      position: absolute;
+      bottom: 8px;
+      left: calc(50% - 6px);
+      background: transparent;
+    }
+
+    .arrow span {
+      position: relative;
+      z-index: 1;
+      background: var(--paper);
+      padding: 4px 6px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .flow-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .matrix th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 650;
+    }
+
+    .risk {
+      border-color: var(--danger-border);
+      background: var(--danger);
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .legend-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--panel);
+    }
+
+    .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: -2px;
+      border: 1px solid rgba(24, 32, 42, 0.15);
+    }
+
+    .s-gateway { background: var(--gateway); }
+    .s-assume { background: var(--assume); }
+    .s-server { background: var(--server); }
+    .s-ai { background: var(--ai); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .milestone {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+
+    .milestone strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .main-layout,
+      .flow,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        min-height: 58px;
+      }
+
+      .legend,
+      .timeline,
+      .device-columns {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        grid-template-columns: 1fr;
+      }
+
+      .meta {
+        justify-items: start;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        max-width: none;
+        padding: 18px;
+      }
+
+      .card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <section>
+        <h1>三棵松鸿蒙公园整体架构图 v7</h1>
+        <p class="subtitle">
+          施工阶段架构口径：设备接入不按物理就近一刀切，按协议复杂度、复用价值、开发成本、调试成本和交付风险分流到鸿蒙网关或服务器②。
+        </p>
+        <div class="tag-row">
+          <span class="tag">SSOT：DS-20260503-003</span>
+          <span class="tag">D-20260504-002 网关接入边界评估原则</span>
+          <span class="tag">D-20260504-003 关键时间节点</span>
+        </div>
+      </section>
+      <section class="meta">
+        <span>版本：v7</span>
+        <span>日期：2026-05-04</span>
+        <span>归档域：03_技术方案 / 01_系统架构</span>
+      </section>
+    </header>
+
+    <section class="grid main-layout">
+      <div class="grid">
+        <section class="card diagram">
+          <div class="lane-title">
+            <h2>一、设备接入分流</h2>
+            <span>先分流，再定义接口和责任边界</span>
+          </div>
+
+          <div class="device-columns">
+            <div class="bucket gateway">
+              <h3>直接走网关</h3>
+              <p class="rule">协议简单、点位清晰、复用价值高；优先沉淀为网关能力。</p>
+              <div class="items">
+                <span class="pill">灯控</span>
+                <span class="pill">星闪 Mesh</span>
+                <span class="pill">NFC 打卡</span>
+                <span class="pill">光感</span>
+                <span class="pill">水位</span>
+                <span class="pill">土壤</span>
+                <span class="pill">音响</span>
+                <span class="pill">屏幕</span>
+                <span class="pill">拾音器</span>
+                <span class="pill">RS485 / Modbus 点位</span>
+              </div>
+            </div>
+
+            <div class="bucket assume">
+              <h3>Assume 走网关</h3>
+              <p class="rule">默认倾向网关，但必须完成协议、调试和成本评估。</p>
+              <div class="items">
+                <span class="pill">简单 SOS 终端</span>
+                <span class="pill">简单水电表</span>
+                <span class="pill">摄像机状态点位</span>
+                <span class="pill">环境传感器</span>
+                <span class="pill">本地控制器</span>
+                <span class="pill">其他简单开关量</span>
+              </div>
+            </div>
+
+            <div class="bucket server">
+              <h3>复杂系统走服务器②</h3>
+              <p class="rule">厂商系统、平台型设备、视频流和复杂业务记录不下沉到网关。</p>
+              <div class="items">
+                <span class="pill">停车场系统</span>
+                <span class="pill">门禁 / 闸机</span>
+                <span class="pill">海康视频 / NVR</span>
+                <span class="pill">充电桩</span>
+                <span class="pill">光伏储能</span>
+                <span class="pill">水肥一体机</span>
+                <span class="pill">水库既有设备</span>
+                <span class="pill">复杂 SOS 平台</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card diagram">
+          <div class="lane-title">
+            <h2>二、总体系统链路</h2>
+            <span>网关接简单设备，服务器②接复杂系统并统一对外</span>
+          </div>
+
+          <div class="flow">
+            <div class="flow-stack">
+              <div class="system gateway-box">
+                <h3>鸿蒙网关</h3>
+                <ul>
+                  <li>简单设备接入与协议转换</li>
+                  <li>星闪 Mesh、NFC、灯控、传感器点位</li>
+                  <li>本地闭环策略和边缘控制</li>
+                </ul>
+              </div>
+              <div class="system">
+                <h3>Assume 走网关评估池</h3>
+                <ul>
+                  <li>协议清晰则进入网关</li>
+                  <li>涉及平台、历史、权限、视频则转服务器②</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="arrow"><span>状态上报<br>控制下发</span></div>
+
+            <div class="flow-stack">
+              <div class="system server2-box">
+                <h3>服务器② IoT 中间层</h3>
+                <ul>
+                  <li>复杂系统接入和厂商平台对接</li>
+                  <li>统一物模型、状态缓存、控制 API</li>
+                  <li>区 Meta 接入代理、本地共享数据入口</li>
+                  <li>日志、权限、联调和验收数据沉淀</li>
+                </ul>
+              </div>
+              <div class="system server2-box">
+                <h3>复杂系统接入</h3>
+                <ul>
+                  <li>停车、门禁、海康、充电桩、光伏储能</li>
+                  <li>ISAPI、GB/T28181、OCPP、DL/T645、Modbus</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="arrow"><span>统一物模型 / API</span></div>
+
+          <div class="two-col">
+            <div class="system ai-box">
+              <h3>服务器① 闪电智能体</h3>
+              <ul>
+                <li>不直接接设备，不直接接网关</li>
+                <li>通过服务器② API 获取设备状态和发起控制</li>
+                <li>承载 RAG、ASR/TTS、数字人和游客互动业务</li>
+              </ul>
+            </div>
+            <div class="system external-box">
+              <h3>前端应用 / 运维后台 / 外部平台</h3>
+              <ul>
+                <li>小程序、鸿蒙元服务、灯杆屏、瀑布屏、管理后台</li>
+                <li>区 Meta 平台、大运平台、GIS/地图、指挥中心</li>
+                <li>外部平台不替代 SSOT，接口以总集成规格为准</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid">
+        <section class="card">
+          <h2>接入边界判断表</h2>
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>判断项</th>
+                <th>走网关</th>
+                <th>走服务器②</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>协议复杂度</td>
+                <td>点位清晰、Modbus/RS485/简单控制</td>
+                <td>平台 API、SDK、私有协议、视频流</td>
+              </tr>
+              <tr>
+                <td>数据类型</td>
+                <td>状态、告警、开关量、简单控制</td>
+                <td>记录、流水、图片、视频、权限、历史数据</td>
+              </tr>
+              <tr>
+                <td>复用价值</td>
+                <td>同类项目可复制，值得沉淀插件</td>
+                <td>厂商差异大，以项目交付为优先</td>
+              </tr>
+              <tr>
+                <td>交付风险</td>
+                <td>边缘调试可控</td>
+                <td>需要服务器日志、重试、缓存、权限和联调</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <h2>关键数据流</h2>
+          <ul class="note-list">
+            <li>设备状态上报：设备 → 网关/服务器② → 统一物模型 → 应用/Meta</li>
+            <li>设备控制下发：应用/闪电/Meta → 服务器② → 网关/厂商系统 → 设备</li>
+            <li>AI 业务调用：闪电智能体 → 服务器② API → 设备状态/控制</li>
+            <li>运营数据沉淀：服务器②/服务器①/前端 → 数据库/日志/报表</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>关键里程碑</h2>
+          <div class="timeline">
+            <div class="milestone">
+              <strong>2026-06-30</strong>
+              <span class="small">完成现场硬件安装</span>
+            </div>
+            <div class="milestone">
+              <strong>2026-09-30</strong>
+              <span class="small">完成软件试调整</span>
+            </div>
+            <div class="milestone">
+              <strong>2026-11-30</strong>
+              <span class="small">完成 XTS 认证</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card risk">
+          <h2>当前风险</h2>
+          <ul class="risk-list">
+            <li>区 Meta 平台对接文档未到位，会影响服务器②接口设计和联调。</li>
+            <li>Assume 走网关设备必须完成协议调研，不能直接固化为开发范围。</li>
+            <li>设备数量和最终范围必须回到 DS-20260503-003 校验。</li>
+            <li>闪电智能体不得绕过服务器②直接连接网关或设备。</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>图例</h2>
+          <div class="legend">
+            <div class="legend-item"><span class="swatch s-gateway"></span>网关优先</div>
+            <div class="legend-item"><span class="swatch s-assume"></span>待评估</div>
+            <div class="legend-item"><span class="swatch s-server"></span>服务器②</div>
+            <div class="legend-item"><span class="swatch s-ai"></span>AI/应用</div>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
